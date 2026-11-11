@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Tabuleiro from "./components/tabuleiro";
+import BotaoReiniciar from "./components/botaoReiniciar";
 import "./App.css";
 
 function App() {
@@ -71,9 +72,7 @@ function reiniciar() {
 
     {venceu && <h2>Você venceu!</h2>}
 
-    <button onClick={reiniciar}>
-      Reiniciar
-    </button>
+    <BotaoReiniciar reiniciar={reiniciar} />
   </div>
   );
 }
