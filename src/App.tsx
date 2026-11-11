@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Recipiente from "./components/recipiente";
+import Tabuleiro from "./components/tabuleiro";
 import "./App.css";
 
 function App() {
@@ -60,25 +60,21 @@ function reiniciar() {
 
   return (
     <div>
-      <h1>Magic Sort - Igor Knop</h1>
-      <p>Atividade em sala de Desenvolvimento Web Front-End</p>
+    <h1>Magic Sort - Igor Knop</h1>
+    <p>Atividade em sala de Desenvolvimento Web Front-End</p>
 
-      <div className="jogo">
-        {venceu && <h2>Você venceu!</h2>}
-        <button onClick={reiniciar}>
-          Reiniciar
-        </button>
-        {garrafas.map((garrafa, i) => (
-          <Recipiente
-            key={i}
-            emojis={garrafa}
-            clicar={() => {
-            if (!venceu) mover(i);
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    <Tabuleiro
+      garrafas={garrafas}
+      venceu={venceu}
+      mover={mover}
+    />
+
+    {venceu && <h2>Você venceu!</h2>}
+
+    <button onClick={reiniciar}>
+      Reiniciar
+    </button>
+  </div>
   );
 }
 
