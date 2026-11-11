@@ -6,7 +6,7 @@ interface Props {
 function Recipiente({ emojis, clicar }: Props) {
   return (
     <button onClick={clicar}>
-      {emojis.map((emoji, i) => (
+      {[...emojis].reverse().map((emoji, i) => (
         <p key={i}>{emoji}</p>
       ))}
     </button>

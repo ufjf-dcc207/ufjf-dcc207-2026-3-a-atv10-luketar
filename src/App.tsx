@@ -19,6 +19,10 @@ function mover(destino: number) {
     }
     return;
   }
+  if (selecionado === destino) {
+  setSelecionado(-1);
+  return;
+}
 
   const novas = garrafas.map(g => [...g]);
 
@@ -38,17 +42,39 @@ function mover(destino: number) {
   setSelecionado(-1);
 }
 
+const venceu = garrafas.every(g =>
+  g.length === 0 ||
+  (g.length === 3 && g.every(e => e === g[0]))
+);
+
+function reiniciar() {
+  setGarrafas([
+    ["🍎", "🍌", "🍇"],
+    ["🍇", "🍎", "🍌"],
+    ["🍌", "🍇", "🍎"],
+    []
+  ]);
+
+  setSelecionado(-1);
+}
+
   return (
     <div>
-      <h1>Magi Sort - Igor Knop</h1>
+      <h1>Magic Sort - Igor Knop</h1>
       <p>Atividade em sala de Desenvolvimento Web Front-End</p>
 
       <div className="jogo">
+        {venceu && <h2>Você venceu!</h2>}
+        <button onClick={reiniciar}>
+          Reiniciar
+        </button>
         {garrafas.map((garrafa, i) => (
           <Recipiente
             key={i}
             emojis={garrafa}
-            clicar={() => mover(i)}
+            clicar={() => {
+            if (!venceu) mover(i);
+            }}
           />
         ))}
       </div>
