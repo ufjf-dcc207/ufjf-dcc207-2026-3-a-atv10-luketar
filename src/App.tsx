@@ -5,9 +5,9 @@ import "./App.css";
 
 function App() {
   const [garrafas, setGarrafas] = useState([
-    ["🍎", "🍌", "🍇"],
-    ["🍇", "🍎", "🍌"],
-    ["🍌", "🍇", "🍎"],
+    ["🔴", "🔵", "🟢"],
+    ["🟢", "🔴", "🔵"],
+    ["🔵", "🟢", "🔴"],
     [] as string[]
   ]);
 
@@ -20,10 +20,11 @@ function mover(destino: number) {
     }
     return;
   }
+
   if (selecionado === destino) {
-  setSelecionado(-1);
-  return;
-}
+    setSelecionado(-1);
+    return;
+  }
 
   const novas = garrafas.map(g => [...g]);
 
@@ -31,16 +32,14 @@ function mover(destino: number) {
   const chegada = novas[destino];
 
   if (
-    origem.length > 0 &&
     chegada.length < 3 &&
     (chegada.length === 0 ||
       chegada[chegada.length - 1] === origem[origem.length - 1])
   ) {
     chegada.push(origem.pop()!);
     setGarrafas(novas);
+    setSelecionado(-1);
   }
-
-  setSelecionado(-1);
 }
 
 const venceu = garrafas.every(g =>
@@ -50,9 +49,9 @@ const venceu = garrafas.every(g =>
 
 function reiniciar() {
   setGarrafas([
-    ["🍎", "🍌", "🍇"],
-    ["🍇", "🍎", "🍌"],
-    ["🍌", "🍇", "🍎"],
+    ["🔴", "🔵", "🟢"],
+    ["🟢", "🔴", "🔵"],
+    ["🔵", "🟢", "🔴"],
     []
   ]);
 
@@ -63,6 +62,10 @@ function reiniciar() {
     <div>
     <h1>Magic Sort - Igor Knop</h1>
     <p>Atividade em sala de Desenvolvimento Web Front-End</p>
+
+    {selecionado !== -1 && (
+    <p>Recipiente {selecionado + 1} selecionado</p>
+    )}
 
     <Tabuleiro
       garrafas={garrafas}
